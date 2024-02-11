@@ -8,21 +8,18 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="nav-item dropdown ">
-                <a href="#" class="nav-link has-dropdown"><i
-                        class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
-                <ul class="dropdown-menu">
-                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
-                        <a class="nav-link" href="{{ route('home') }}">General Dashboard</a>
-                    </li>
-                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
-                    </li>
-                </ul>
+            <li class="">
+                <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+            </li>
+             <li class="menu-header">Pages</li>
+            <li class="">
+                <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-users"></i> <span>Users</span></a>
             </li>
             <li class="">
-                <a class="nav-link" href="{{ route('users.index') }}"><i class="fas fa-users"></i> <span>User
-                        Management</span></a>
+                <a class="nav-link" href="{{ route('products.index') }}"><i class="fas fa-cube"></i> <span>Products</span></a>
+            </li>
+            <li class="">
+                <a class="nav-link" href="{{ route('categories.index') }}"><i class="fas fa-folder"></i> <span>Categories</span></a>
             </li>
         </ul>
     </aside>

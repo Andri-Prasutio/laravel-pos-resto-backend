@@ -202,7 +202,14 @@
         </li>
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                @if (auth()->user()->role == 'admin')
+                    <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                @elseif (auth()->user()->role == 'staff')
+                    <img alt="image" src="{{ asset('img/avatar/avatar-2.png') }}" class="rounded-circle mr-1">
+                @else
+                    <img alt="image" src="{{ asset('img/avatar/avatar-4.png') }}" class="rounded-circle mr-1">
+                @endif
+
                 <div class="d-sm-none d-lg-inline-block">Hi,{{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

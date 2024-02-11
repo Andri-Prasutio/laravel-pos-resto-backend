@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Products')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,12 +11,12 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Users</h1>
+                <h1>Products</h1>
 
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">User</a></div>
-                    <div class="breadcrumb-item"><a href="{{ route('users.index') }}"> All User</a></div>
+                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                    <div class="breadcrumb-item"><a href="#">Product</a></div>
+                    <div class="breadcrumb-item"><a href="{{ route('products.index') }}"> All Product</a></div>
                 </div>
             </div>
             <div class="section-body">
@@ -33,19 +33,19 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-large">Add New</a>
+                                <a href="{{ route('products.create') }}" class="btn btn-primary btn-large">Add New</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped" id="table-1">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">
-                                                    #
-                                                </th>
+                                                <th>#</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
+                                                <th>Image</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th class="text-center">Status</th>
                                                 <th>Created At</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
@@ -54,36 +54,40 @@
                                             @php
                                                 $no = 1;
                                             @endphp
-                                            @foreach ($users as $user)
+                                            @foreach ($products as $product)
                                                 <tr>
-                                                    <td class="text-center">{{ $no++ }}</td>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $product->name }}</td>
                                                     <td>
-                                                        @if ($user->role == 'admin')
-                                                            <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}"
-                                                                class="rounded-circle" width="35" data-toggle="tooltip"
-                                                                title="{{ $user->role }}">
-                                                        @elseif ($user->role == 'staff')
-                                                            <img alt="image" src="{{ asset('img/avatar/avatar-2.png') }}"
-                                                                class="rounded-circle" width="35" data-toggle="tooltip"
-                                                                title="{{ $user->role }}">
+                                                        @if ($product->image)
+                                                            <img src="{{ asset($product->image) }}" alt="Product Image"
+                                                                style="width: 100px; height: 100px;">
                                                         @else
-                                                            <img alt="image"
-                                                                src="{{ asset('img/avatar/avatar-4.png') }}"
-                                                                class="rounded-circle" width="35" data-toggle="tooltip"
-                                                                title="{{ $user->role }}">
+                                                            <span class="badge badge-secondary">No Image</span>
                                                         @endif
-
                                                     </td>
-                                                    <td>{{ $user->created_at->format('d-m-Y') }}</td>
+                                                    <td>{{ $product->category->name }}</td>
+                                                    <td>{{ $product->price }}</td>
+                                                    <td class="text-center">
+                                                        @if ($product->status == 1)
+                                                            <i class="fas fa-square-check text-success"
+                                                                style="font-size: 24px;" data-toggle="tooltip"
+                                                                title="Active"></i>
+                                                        @else
+                                                            <i class="fas fa-square-xmark text-danger"
+                                                                style="font-size: 24px;" data-toggle="tooltip"
+                                                                title="Inactive"></i>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $product->created_at->format('d-m-Y') }}</td>
+
                                                     <td>
                                                         <div class="d-flex justify-content-center">
-                                                            <a href="{{ route('users.edit', $user->id) }}"
+                                                            <a href="{{ route('products.edit', $product->id) }}"
                                                                 class="btn btn-sm btn-primary">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <form action="{{ route('users.destroy', $user->id) }}"
+                                                            <form action="{{ route('products.destroy', $product->id) }}"
                                                                 method="POST" class="ml-2">
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <input type="hidden" name="_token"
